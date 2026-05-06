@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sistema da disciplina de Tecnologias Web - CCOMP - UFSJ
 
-## Getting Started
+Sistema web desenvolvido para as aulas da disciplina de **Tecnologias Web** do Curso de Bacharelado em Ciência da Computação da UFSJ.
 
-First, run the development server:
 
+## Instalação do Node.js
+Caso seu Linux ainda não possua o Node.js instalado, **não faça isso usando sudo apt install**, pois isso instalará uma versão antiga. Ao invés disso, siga o seguinte passo:
+
+1. Instale o **curl**:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+sudo apt install curl
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Instale **nvm**: 
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Execute o nvm para instalar o node e o npm:
+```bash
+nvm install --lts      # Instala a última versão estável
+or
+nvm install vX.XX.XX   # Instala uma versão específica 
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. É possível instalar várias versões do Node. Caso queira trocar de uma versão para outra, execute:
+```bash
+nvm use vX.XX.XX             # Para trocar a versão em uso
+```
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## Instalação do sistema
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Faça o download do repositório do sistema [GitHub](https://github.com/matheusdcomp/nextjs-twb) em uma pasta no seu computador. Verifique se a versão do node e npm do projeto é compatível com a que seu computador possui instalada.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Após o download, é necessário instalar as bibliotecas, por meio do seguinte comando:
+```bash
+npm install
+```
 
-## Deploy on Vercel
+O sistema evolui ao longo das aulas das disciplinas. A branch **main** tem a aula inicial e as demais branches são identificadas por um número. Quanto maior o número, mais avançado no assunto a branch está e o sistema está mais completo. Alterne entre as branches para visualizar aulas anterior e acompanhar a evolução do conteúdo da disciplina.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Execução
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Faça o deploy no modo de desenvolvimento:
+```bash
+npm run dev
+```
+
+Ou faça o deploy no modo de produção:
+```bash
+npm run build
+```
+
+
+## Visualização e Uso
+
+Para visualizar o site no nevegador, acesse [http://localhost:3000](http://localhost:3000).
+
+
