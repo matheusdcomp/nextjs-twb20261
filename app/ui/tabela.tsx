@@ -72,3 +72,41 @@ export default function Tabela({
     </div>
   );
 }
+
+export function selecionado() {
+
+  const ln: string[] = [];
+  const trs = document.querySelectorAll("#tabelaCRUD tbody tr") as NodeListOf<HTMLTableRowElement>;
+
+  for (let i = 0; i < trs.length; i++) {
+
+    if ((trs[i].cells[0].firstChild as HTMLInputElement)!.checked) {
+
+      for (let j = 1; j < trs[i].cells.length - 1; j++) {
+        ln.push(trs[i].cells[j].firstChild!.nodeValue + "");
+      }
+      break;
+    }
+  }
+  return ln;
+}
+
+export function selecionados() {
+
+  const linhas: string[][] = [];
+  const trs = document.querySelectorAll("#tabelaCRUD tbody tr") as NodeListOf<HTMLTableRowElement>;
+
+  for (let i = 0; i < trs.length; i++) {
+
+    if ((trs[i].cells[0].firstChild as HTMLInputElement)!.checked) {
+
+      const ln: string[] = [];
+
+      for (let j = 1; j < trs[i].cells.length - 1; j++) {
+        ln.push(trs[i].cells[j].firstChild!.nodeValue + "");
+      }
+      linhas.push(ln);
+    }
+  }
+  return linhas;
+}
