@@ -1,6 +1,56 @@
 import Image from "next/image";
 import Link from "next/link";
 
+
+const csstb = "mb-2 w-full border border-zinc-800 border-collapse text-left";
+const csshd = "bg-amber-700";
+const csstr = "even:bg-amber-200 hover:bg-amber-400";
+const cssth = "p-1 border border-zinc-800 text-zinc-100";
+const csstd = "p-1 border border-zinc-800 text-zinc-800";
+const cssbt = "bg-amber-700 mx-1 p-1 text-center rounded-2xl";
+
+
+function TDCheck({ index }: { index: string }) {
+  return (
+    <td
+      key={"tdcheck" + index}
+      className={csstd + " text-center w-8"}
+    >
+      <input
+        id={"check" + index}
+        type="checkbox"
+      />
+    </td>
+  );
+}
+
+function TDAcoes({ entidade, index }: { entidade: string, index: string }) {
+  return (
+    <td key={"acoes" + index} className={csstd + " text-center"}>
+      <Link href={`/${entidade}/forms/edt/${index}`} >
+        <button className={cssbt}>
+          <Image
+            src="/edt.svg"
+            alt="EDT"
+            height={16}
+            width={16}
+          />
+        </button>
+      </Link>
+      <Link href={`/${entidade}/forms/rem/${index}`}>
+        <button className={cssbt}>
+          <Image
+            src="/rem.svg"
+            alt="REM"
+            height={16}
+            width={16}
+          />
+        </button>
+      </Link>
+    </td>
+  );
+}
+
 export default function Tabela({
   entidade,
   cabecalho,
@@ -18,12 +68,6 @@ export default function Tabela({
     cbs.forEach(cb => cb.checked = cba.checked);
   }
 
-  const csstb = "mb-2 w-full border border-zinc-800 border-collapse text-left";
-  const csshd = "bg-amber-700";
-  const csstr = "even:bg-amber-200 hover:bg-amber-400";
-  const cssth = "p-1 border border-zinc-800 text-zinc-100";
-  const csstd = "p-1 border border-zinc-800 text-zinc-800";
-  const cssbt = "bg-amber-700 mx-1 p-1 text-center rounded-2xl";
 
   const ths = (
     <tr key={"trcabecalho"} className={csshd}>
@@ -55,45 +99,15 @@ export default function Tabela({
     </tr>
   );
 
-  const trs = linhas.map((tr, i) =>
-    <tr key={"tr" + i} className={csstr}>
-      <td
-        key={"tdcheck" + i}
-        className={csstd + " text-center w-8"}
-      >
-        <input
-          id={"check" + i}
-          type="checkbox"
-          className="w-4 h-4"
-        />
-      </td>
+  const trs = linhas.map((tr) =>
+    <tr key={"tr" + tr[0]} className={csstr}>
+      <TDCheck index={tr[0]} />
       {tr.map((td, j) =>
-        <td key={"td" + i + "-" + j} className={csstd}>
+        <td key={"td" + tr[0] + "-" + j} className={csstd}>
           {td}
         </td>
       )}
-      <td key={"acoes" + i} className={csstd + " text-center"}>
-        <Link href={`/${entidade}/forms/edt/${tr[0]}`} >
-          <button className={cssbt}>
-            <Image
-              src="/edt.svg"
-              alt="EDT"
-              height={16}
-              width={16}
-            />
-          </button>
-        </Link>
-        <Link href={`/${entidade}/forms/rem/${tr[0]}`}>
-          <button className={cssbt}>
-            <Image
-              src="/rem.svg"
-              alt="REM"
-              height={16}
-              width={16}
-            />
-          </button>
-        </Link>
-      </td>
+      <TDAcoes entidade={entidade} index={tr[0]} />
     </tr>
   );
 
