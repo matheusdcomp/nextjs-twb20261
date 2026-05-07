@@ -1,25 +1,18 @@
+export const API = "http://localhost:3000/api/usuario/";
+
 export default class Usuario {
 
   public id;
   public nome;
   public email;
 
-  constructor(id: number, nome: String, email: String) {
+  constructor(id: number, nome: string, email: string) {
     this.id = id;
     this.nome = nome;
     this.email = email;
   }
-
-  atributos() {
-    return Object.keys(this);
-  }
-
-  valores() {
-    //return [this.id+"", this.nome, this.email];
-    return Object.values(this).map(v => typeof v !== 'string' ? `${v}` : v);
-  }
-
 }
+
 /*
 type Usuario = {
   id:number,

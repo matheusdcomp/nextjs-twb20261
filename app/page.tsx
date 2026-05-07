@@ -6,8 +6,9 @@ export default function Home() {
       <Image
         src="/tatu-laranja.png"
         alt="HTML"
-        height={300}
-        width={300}
+        loading="eager"
+        height={600}
+        width={600}
       />
     </div>
   );
