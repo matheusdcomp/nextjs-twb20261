@@ -10,7 +10,7 @@ export default function UsuarioAdcForm() {
 
   function cliqueConfirmar() {
 
-    const valores: string[] = [];
+    const valores: string[] = ["0"];
 
     const inputs: NodeListOf<HTMLInputElement> =
       document.querySelectorAll("#formulario input");
@@ -30,16 +30,8 @@ export default function UsuarioAdcForm() {
       <form
         id="formulario"
         name="formulario"
-        className="w-full text-left">
-        <label className={cssLabel}>
-          <span className={cssSpan}>Id:</span>
-          <input
-            className={cssInput}
-            type="text"
-            id="usuarioId"
-            name="usuarioId"
-            required />
-        </label>
+        className="w-full text-left"
+      >
         <label className={cssLabel}>
           <span className={cssSpan}>Nome:</span>
           <input

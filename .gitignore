@@ -42,3 +42,5 @@ next-env.d.ts
 
 # Ignore Windows Zone.Identifier files
 *:Zone.Identifier
+
+/generated/prisma
