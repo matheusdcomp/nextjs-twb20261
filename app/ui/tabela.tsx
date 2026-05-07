@@ -73,28 +73,11 @@ export default function Tabela({
   );
 }
 
-export function selecionado() {
-
-  const ln: string[] = [];
-  const trs = document.querySelectorAll("#tabelaCRUD tbody tr") as NodeListOf<HTMLTableRowElement>;
-
-  for (let i = 0; i < trs.length; i++) {
-
-    if ((trs[i].cells[0].firstChild as HTMLInputElement)!.checked) {
-
-      for (let j = 1; j < trs[i].cells.length - 1; j++) {
-        ln.push(trs[i].cells[j].firstChild!.nodeValue + "");
-      }
-      break;
-    }
-  }
-  return ln;
-}
-
-export function selecionados() {
+export function selecionados(apenasUm: boolean) {
 
   const linhas: string[][] = [];
-  const trs = document.querySelectorAll("#tabelaCRUD tbody tr") as NodeListOf<HTMLTableRowElement>;
+  const trs: NodeListOf<HTMLTableRowElement> =
+    document.querySelectorAll("#tabelaCRUD tbody tr");
 
   for (let i = 0; i < trs.length; i++) {
 
@@ -102,10 +85,12 @@ export function selecionados() {
 
       const ln: string[] = [];
 
-      for (let j = 1; j < trs[i].cells.length - 1; j++) {
-        ln.push(trs[i].cells[j].firstChild!.nodeValue + "");
-      }
+      for (let j = 1; j < trs[i].cells.length - 1; j++)
+        ln.push(trs[i].cells[j].innerText);
+
       linhas.push(ln);
+
+      if (apenasUm) break;
     }
   }
   return linhas;

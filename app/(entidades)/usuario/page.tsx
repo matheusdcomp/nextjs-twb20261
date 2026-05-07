@@ -34,7 +34,7 @@ export default function Pagina() {
   }
 
   function cliqueApagar() {
-    const ids = selecionados().map(ln => ln[0]);
+    const ids = selecionados(false).map(ln => ln[0]);
     setUsuarios(usuarios.filter(u => !ids.includes(u.id + "")));
   }
 
