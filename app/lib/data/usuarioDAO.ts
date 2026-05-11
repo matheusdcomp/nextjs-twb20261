@@ -1,5 +1,5 @@
 import Usuario from "@/app/(entidades)/usuario/usuario";
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@/app/lib/data/prisma";
 
 
 export async function adcUsuario(usuario: Usuario): Promise<Usuario> {

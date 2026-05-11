@@ -1,4 +1,4 @@
-import { obtUsuarioPorId, obtUsuarios } from "@/data/usuarioDAO";
+import { obtUsuarioPorId, obtUsuarios } from "@/app/lib/data/usuarioDAO";
 
 
 export async function GET(request: Request) {

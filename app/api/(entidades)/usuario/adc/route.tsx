@@ -1,4 +1,4 @@
-import { adcUsuario } from "@/data/usuarioDAO";
+import { adcUsuario } from "@/app/lib/data/usuarioDAO";
 import Usuario from "@/app/(entidades)/usuario/usuario";
 
 
