@@ -1,6 +1,7 @@
 'use client'
 
 import { adcUsuario } from "@/app/(entidades)/usuario/action";
+import { Usuario } from "@/generated/prisma/client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -10,14 +11,16 @@ export default function UsuarioAdcForm() {
 
   function cliqueConfirmar() {
 
-    const valores: string[] = ["0"];
+    const usuario: Usuario = {
+      id: 0,
+      nome: document.forms[0]["usuarioNome"].value,
+      email: document.forms[0]["usuarioEmail"].value,
+    };
 
-    const inputs: NodeListOf<HTMLInputElement> =
-      document.querySelectorAll("#formulario input");
+    adcUsuario(usuario).then(
+      usuario => alert("Usuario adiconado: " + usuario.nome)
+    );
 
-    inputs.forEach(i => valores.push(i.value));
-
-    adcUsuario(valores).then(msn => alert(msn));
     router.push("/usuario");
   }
 

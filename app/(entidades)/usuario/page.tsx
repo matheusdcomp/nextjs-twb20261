@@ -1,26 +1,27 @@
 'use client';
 import Tabela from "@/app/ui/tabela";
-import Usuario, { API } from "./usuario";
-import useSWR from "swr";
+import { Usuario } from "@/generated/prisma/client";
+import { useEffect, useState } from "react";
+import { obtUsuarios } from "./action";
 
 export default function PaginaUsuario() {
 
-  const fetcher = (url: string) => fetch(url).then((res => res.json()));
+  const [usuarios, setUsuarios] = useState<Usuario[] | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const { data, error, isLoading } = useSWR<Usuario[]>(
-    `${API}obt?id=0`,
-    fetcher
-  );
+  useEffect(() => {
+    obtUsuarios().then(
+      value => {
+        setUsuarios(value);
+        setIsLoading(false);
+      },
+      error => setIsLoading(false),
+    );
+  }, []);
 
-  if (isLoading) return usuarioLoading()
-
-  if (error) return usuarioError();
-
-  const usuarios = data && data.length > 0 ?
-    data :
-    [new Usuario(0, "Nenhum usuário retornado", "-")];
-
-  return usuarioData(usuarios);
+  if (isLoading) return usuarioLoading();
+  if (usuarios) return usuarioData(usuarios);
+  return usuarioError();
 }
 
 function usuarioLoading() {
@@ -49,7 +50,7 @@ function usuarioData(usuarios: Usuario[]) {
       </h1>
       <Tabela
         entidade={"usuario"}
-        cabecalho={["Id", "Nome", "Email"]}
+        colunas={["Id", "Nome", "Email"]}
         linhas={usuarios.map(u => [`${u.id}`, u.nome, u.email])}
       />
     </>
