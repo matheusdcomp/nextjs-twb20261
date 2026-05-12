@@ -2,13 +2,17 @@
 import { Botao, BotaoLink } from "@/app/ui/botoes";
 import { Usuario } from "@/generated/prisma/client";
 import { useRouter } from "next/navigation";
-import { use } from "react";
-import { edtUsuario } from "@/app/(entidades)/usuario/action";
+import { use, useEffect, useState } from "react";
+import { edtUsuario, obtUsuarioPorId, obtUsuarios } from "@/app/(entidades)/usuario/action";
 
 export default function EdtUsuario({ params }: { params: Promise<{ id: string }> }) {
 
   const { id } = use(params);
   const router = useRouter();
+  const [usuario, setUsuario] = useState<Usuario | null>();
+  useEffect(() => {
+    obtUsuarioPorId(Number(id)).then(value => setUsuario(value));
+  }, []);
 
   function cliqueConfirmar() {
 
@@ -27,7 +31,7 @@ export default function EdtUsuario({ params }: { params: Promise<{ id: string }>
 
   const cssLabel = "w-full block m-2 text-cor1"
   const cssSpan = "inline-block w-1/10 font-bold"
-  const cssInput = "w-8/10 border border-cor1 ml-1";
+  const cssInput = "w-8/10 border border-cor1 ml-1 p-1";
 
   return (
     <div className="w-full">
@@ -43,6 +47,7 @@ export default function EdtUsuario({ params }: { params: Promise<{ id: string }>
             type="text"
             id="usuarioNome"
             name="usuarioNome"
+            defaultValue={usuario ? usuario.nome : ""}
             required />
         </label>
         <label className={cssLabel}>
@@ -52,12 +57,25 @@ export default function EdtUsuario({ params }: { params: Promise<{ id: string }>
             type="text"
             id="usuarioEmail"
             name="usuarioEmail"
+            defaultValue={usuario ? usuario.email : ""}
             required />
         </label>
       </form>
-      <div className="w-full bg-amber-200">
-        <Botao img="/edt.svg" alt="Confirmar" hei={10} wid={100} onClick={cliqueConfirmar} />
-        <BotaoLink img="/rem.svg" alt="Cancelar" hei={10} wid={100} ref="/usuario" />
+      <div className="my-5 w-full flex flex-row content-center justify-around items-center">
+        <Botao
+          imagem="/edt.svg"
+          texto="Confirmar"
+          tamimg={36}
+          wbtn="w-50"
+          onClick={cliqueConfirmar}
+        />
+        <BotaoLink
+          imagem="/cnc.svg"
+          texto="Cancelar"
+          tamimg={36}
+          wbtn="w-50"
+          ref="/usuario"
+        />
       </div>
     </div>
   );

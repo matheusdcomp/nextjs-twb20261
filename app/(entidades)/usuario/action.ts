@@ -25,7 +25,11 @@ export async function edtUsuario(usuario: Usuario): Promise<Usuario> {
 }
 
 export async function obtUsuarios(): Promise<Usuario[]> {
-  return await prisma.usuario.findMany();
+  return await prisma.usuario.findMany({
+  orderBy: {
+    nome: "asc",
+  },
+});
 }
 
 export async function obtUsuarioPorId(id: number): Promise<Usuario | null> {

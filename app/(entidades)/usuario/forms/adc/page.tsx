@@ -26,7 +26,7 @@ export default function UsuarioAdcForm() {
 
   const cssLabel = "w-full block m-2 text-cor1"
   const cssSpan = "inline-block w-1/10 font-bold"
-  const cssInput = "w-8/10 border border-cor1 ml-1";
+  const cssInput = "w-8/10 border border-cor1 ml-1 p-1";
 
   return (
     <div className="w-full">
@@ -54,9 +54,21 @@ export default function UsuarioAdcForm() {
             required />
         </label>
       </form>
-      <div className="w-full bg-amber-200">
-        <Botao img="/adc.svg" alt="Confirmar" hei={10} wid={100} onClick={cliqueConfirmar} />
-        <BotaoLink img="/rem.svg" alt="Cancelar" hei={10} wid={100} ref="/usuario" />
+      <div className="my-5 w-full flex flex-row content-center justify-around items-center">
+        <Botao
+          imagem="/adc.svg"
+          texto="Confirmar"
+          tamimg={36}
+          wbtn="w-50"
+          onClick={cliqueConfirmar}
+        />
+        <BotaoLink
+          imagem="/cnc.svg"
+          texto="Cancelar"
+          tamimg={36}
+          wbtn="w-50"
+          ref="/usuario"
+        />
       </div>
     </div>
   );

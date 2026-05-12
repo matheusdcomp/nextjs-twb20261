@@ -3,6 +3,7 @@ import Link from "next/link";
 import { remUsuario } from "@/app/(entidades)/usuario/action";
 import { useRouter } from "next/navigation";
 import { use } from "react";
+import { Botao, BotaoLink } from "@/app/ui/botoes";
 
 export default function RemUsuario({ params }: { params: Promise<{ id: string }> }) {
 
@@ -20,24 +21,27 @@ export default function RemUsuario({ params }: { params: Promise<{ id: string }>
 
   return (
     <div
-      className="m-auto w-1/2 grid grid-cols-4 grid-rows-2 gap-2"
+      className="m-auto w-1/2 border-4 border-amber-600"
     >
-      <h1 className="col-span-4 row-span-1 text-xl text-center">
+      <h1 className="text-xl text-center my-5">
         Deseja realmente apagar o usuário de id {args.id}?
       </h1>
-      <button
-        className="col-span-2 row-span-1 p-2 bg-amber-800 text-zinc-200 font-bold"
-        onClick={cliqueConfirmar}
-      >
-        Confirmar
-      </button>
-      <button
-        className="col-span-2 row-span-1 p-2 bg-amber-800 text-zinc-200 font-bold"
-        onClick={cliqueCancelar}
-      >
-        Cancelar
-      </button>
-
+      <div className="my-5 w-full flex flex-row content-center justify-around items-center">
+        <Botao
+          imagem="/rem.svg"
+          texto="Confirmar"
+          tamimg={36}
+          wbtn="w-30"
+          onClick={cliqueConfirmar}
+        />
+        <BotaoLink
+          imagem="/cnc.svg"
+          texto="Cancelar"
+          tamimg={36}
+          wbtn="w-30"
+          ref="/usuario"
+        />
+      </div>
     </div>
   );
 }

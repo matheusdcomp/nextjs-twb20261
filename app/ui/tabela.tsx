@@ -21,6 +21,7 @@ function TDCheck({ index }: { index: string }) {
   );
 }
 
+
 function THCheck() {
 
   function selecionarTodos() {
@@ -43,26 +44,40 @@ function THCheck() {
   );
 }
 
+
+function THAcoes({ entidade }: { entidade: string }) {
+  return (
+    <th key={"thacoes"} className={cssth + " w-1/10 text-center"}>
+      <BotaoLink
+        imagem="/adc.svg"
+        texto="ADC"
+        tamimg={20}
+        ref={`/${entidade}/forms/adc`}
+      />
+    </th>
+  );
+}
+
+
 function TDAcoes({ entidade, index }: { entidade: string, index: string }) {
   return (
     <td key={"acoes" + index} className={csstd + " text-center"}>
       <BotaoLink
-        img="/edt.svg"
-        alt="EDT"
-        hei={16}
-        wid={16}
+        imagem="/edt.svg"
+        texto="EDT"
+        tamimg={16}
         ref={`/${entidade}/forms/edt/${index}`}
       />
       <BotaoLink
-        img="/rem.svg"
-        alt="REM"
-        hei={16}
-        wid={16}
+        imagem="/rem.svg"
+        texto="REM"
+        tamimg={16}
         ref={`/${entidade}/forms/rem/${index}`}
       />
     </td>
   );
 }
+
 
 function Cabecalho({
   entidade,
@@ -80,18 +95,11 @@ function Cabecalho({
           {th}
         </th>
       )}
-      <th key={"thacoes"} className={cssth + " w-1/10"}>
-        <BotaoLink
-          img="/adc.svg"
-          alt="ADC"
-          hei={16}
-          wid={16}
-          ref={`/${entidade}/forms/adc`}
-        />
-      </th>
+      <THAcoes entidade={entidade} />
     </tr>
   );
 }
+
 
 function Linhas({
   entidade,
@@ -113,6 +121,7 @@ function Linhas({
     </tr>
   );
 }
+
 
 export default function Tabela({
   entidade,
@@ -137,6 +146,7 @@ export default function Tabela({
     </div>
   );
 }
+
 
 export function selecionados(apenasUm: boolean) {
 
