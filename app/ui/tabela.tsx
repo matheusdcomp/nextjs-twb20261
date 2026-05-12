@@ -93,7 +93,7 @@ function Cabecalho({
   );
 }
 
-export function Linhas({
+function Linhas({
   entidade,
   linhas
 }:

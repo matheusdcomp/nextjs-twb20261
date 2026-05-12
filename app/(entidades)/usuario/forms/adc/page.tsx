@@ -1,8 +1,8 @@
 'use client'
 
 import { adcUsuario } from "@/app/(entidades)/usuario/action";
+import { Botao, BotaoLink } from "@/app/ui/botoes";
 import { Usuario } from "@/generated/prisma/client";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function UsuarioAdcForm() {
@@ -55,19 +55,8 @@ export default function UsuarioAdcForm() {
         </label>
       </form>
       <div className="w-full bg-amber-200">
-        <button
-          className="m-2 p-2 bg-amber-800 text-zinc-200 text-center font-bold hover:bg-zinc-800"
-          onClick={cliqueConfirmar}
-        >
-          Confirmar
-        </button>
-        <Link href="/usuario">
-          <button
-            className="m-2 p-2 bg-amber-800 text-zinc-200 text-center font-bold hover:bg-zinc-800"
-          >
-            Cancelar
-          </button>
-        </Link>
+        <Botao img="/adc.svg" alt="Confirmar" hei={10} wid={100} onClick={cliqueConfirmar} />
+        <BotaoLink img="/rem.svg" alt="Cancelar" hei={10} wid={100} ref="/usuario" />
       </div>
     </div>
   );
