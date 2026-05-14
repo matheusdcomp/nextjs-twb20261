@@ -25,7 +25,7 @@ export async function adcUsuario(prevState: any, formData: FormData) {
     email: z.email("Email inválido"),
     senha: z.string()
       .min(1, "A senha é obrigatória")
-      .min(8, "A senha deve ter mais de 8 caracteres")
+      .min(8, "A senha deve ter 8 ou mais caracteres")
       .max(32, "A senha deve ter no máximo 32 caracteres"),
     tipo: z.preprocess((val) => val === "on", z.boolean()),
   });
