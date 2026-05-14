@@ -50,8 +50,8 @@ function usuarioData(usuarios: Usuario[]) {
       </h1>
       <Tabela
         entidade={"usuario"}
-        colunas={["Id", "Nome", "Email"]}
-        linhas={usuarios.map(u => [`${u.id}`, u.nome, u.email])}
+        colunas={["Id", "Nome", "Email", "Tipo"]}
+        linhas={usuarios.map(u => [`${u.id}`, u.nome, u.email, u.tipo])}
       />
     </>
   );

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MouseEventHandler } from "react";
+import { useFormStatus } from "react-dom";
 
 const cssbt = "bg-amber-700 mx-1 p-1 rounded-2xl ";
 
@@ -49,5 +50,32 @@ export function BotaoLink(props: BotaoLinkProps) {
         />
       </button>
     </Link>
+  );
+}
+
+type BotaoSubmitProps = {
+  tamimg: number,
+  wbtn?: string,
+}
+
+
+export function BotaoSubmit(props: BotaoSubmitProps) {
+
+  const { pending } = useFormStatus();
+
+  return (
+    <button
+      className={cssbt + " " + props.wbtn}
+      type="submit"
+      aria-disabled={pending}
+    >
+      <Image
+        className="m-auto"
+        src="/ok.svg"
+        alt="OK"
+        height={props.tamimg}
+        width={props.tamimg}
+      />
+    </button>
   );
 }

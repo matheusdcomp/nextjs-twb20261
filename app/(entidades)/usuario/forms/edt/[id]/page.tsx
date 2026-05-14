@@ -18,8 +18,10 @@ export default function EdtUsuario({ params }: { params: Promise<{ id: string }>
 
     const usuario: Usuario = {
       id: Number(id),
-      nome: document.forms[0]["usuarioNome"].value,
-      email: document.forms[0]["usuarioEmail"].value,
+      nome: document.forms[0]["nome"].value,
+      email: document.forms[0]["email"].value,
+      senha: document.forms[0]["senha"].value,
+      tipo: document.forms[0]["tipo"].checked,
     };
 
     edtUsuario(usuario).then(
@@ -45,20 +47,39 @@ export default function EdtUsuario({ params }: { params: Promise<{ id: string }>
           <input
             className={cssInput}
             type="text"
-            id="usuarioNome"
-            name="usuarioNome"
-            defaultValue={usuario ? usuario.nome : ""}
+            id="nome"
+            name="nome"
+            defaultValue={usuario?.nome}
             required />
         </label>
         <label className={cssLabel}>
           <span className={cssSpan}>Email:</span>
           <input
             className={cssInput}
-            type="text"
-            id="usuarioEmail"
-            name="usuarioEmail"
-            defaultValue={usuario ? usuario.email : ""}
+            type="email"
+            id="email"
+            name="email"
+            defaultValue={usuario?.email}
             required />
+        </label>
+        <label className={cssLabel}>
+          <span className={cssSpan}>Senha:</span>
+          <input
+            className={cssInput}
+            type="password"
+            id="senha"
+            name="senha"
+            required />
+        </label>
+        <label className={cssLabel}>
+          <span className={cssSpan}>Admin?</span>
+          <input
+            className="ml-1 accent-amber-700"
+            type="checkbox"
+            id="tipo"
+            name="tipo"
+            checked={usuario?.tipo === "admin"}
+          />
         </label>
       </form>
       <div className="my-5 w-full flex flex-row content-center justify-around items-center">

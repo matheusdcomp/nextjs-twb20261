@@ -1,10 +1,9 @@
 import { BotaoLink } from "./botoes";
 
-const csstb = "mb-2 w-full border border-zinc-800 border-collapse text-left";
-const csshd = "bg-amber-700";
+const csstb = "mb-2 w-full border-1 border-zinc-800 border-collapse text-left text-zinc-800";
+const csshd = "bg-amber-700 text-zinc-100";
 const csstr = "even:bg-amber-200 hover:bg-amber-400";
-const cssth = "p-1 border border-zinc-800 text-zinc-100";
-const csstd = "p-1 border border-zinc-800 text-zinc-800";
+const csstd = "p-1 border-1 border-zinc-800";
 
 
 function TDCheck({ index }: { index: string }) {
@@ -14,6 +13,7 @@ function TDCheck({ index }: { index: string }) {
       className={csstd + " text-center w-8"}
     >
       <input
+        className="accent-amber-700"
         id={"check" + index}
         type="checkbox"
       />
@@ -33,9 +33,10 @@ function THCheck() {
   return (
     <th
       key={"thcheck"}
-      className={cssth + " text-center"}
+      className={csstd + " text-center"}
     >
       <input
+        className="accent-amber-900"
         id="checkAll"
         type="checkbox"
         onChange={selecionarTodos}
@@ -47,7 +48,7 @@ function THCheck() {
 
 function THAcoes({ entidade }: { entidade: string }) {
   return (
-    <th key={"thacoes"} className={cssth + " w-1/10 text-center"}>
+    <th key={"thacoes"} className={csstd + " w-1/10 text-center"}>
       <BotaoLink
         imagem="/adc.svg"
         texto="ADC"
@@ -91,7 +92,7 @@ function Cabecalho({
     <tr key={"trcabecalho"} className={csshd}>
       <THCheck />
       {colunas.map((th, i) =>
-        <th key={"th" + i} className={cssth}>
+        <th key={"th" + i} className={csstd}>
           {th}
         </th>
       )}
@@ -134,9 +135,9 @@ export default function Tabela({
     linhas: string[][]
   }) {
   return (
-    <div className="relative w-full overflow-auto">
+    <div className="h-96 w-full overflow-y-auto">
       <table id="tabelaCRUD" className={csstb}>
-        <thead>
+        <thead className="sticky top-0 z-10">
           <Cabecalho entidade={entidade} colunas={colunas} />
         </thead>
         <tbody>

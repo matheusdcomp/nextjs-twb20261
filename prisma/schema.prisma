@@ -7,10 +7,18 @@ datasource db {
   provider = "postgresql"
 }
 
+
+enum Tipo {
+  usuario
+  admin
+}
+
 model Usuario {
   id     Int     @id @default(autoincrement())
   nome   String
   email  String  @unique
+  senha  String
+  tipo   Tipo    @default(usuario)
 }
 
 
