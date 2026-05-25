@@ -6,7 +6,7 @@ import { obtUsuarios } from "./action";
 
 export default function PaginaUsuario() {
 
-  const [usuarios, setUsuarios] = useState<Usuario[] | null>(null);
+  const [usuarios, setUsuarios] = useState<User[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ function usuarioError() {
   );
 }
 
-function usuarioData(usuarios: Usuario[]) {
+function usuarioData(usuarios: User[]) {
   return (
     <>
       <h1 className="text-amber-800 font-bold text-3xl inline-block">

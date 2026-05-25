@@ -87,7 +87,7 @@ export async function adcUsuario(prevState: any, formData: FormData) {
     }
   }
 
-  const res = await prisma.User.create({
+  const res = await prisma.user.create({
     data: {
       nome: parse.data.nome,
       email: parse.data.email,
@@ -114,8 +114,8 @@ export async function adcUsuario(prevState: any, formData: FormData) {
   }
 }
 
-export async function edtUsuario(usuario: Usuario): Promise<User> {
-  return await prisma.User.update({
+export async function edtUsuario(usuario: User): Promise<User> {
+  return await prisma.user.update({
     where: {
       id: usuario.id,
     },
@@ -129,7 +129,7 @@ export async function edtUsuario(usuario: Usuario): Promise<User> {
 }
 
 export async function obtUsuarios(): Promise<User[]> {
-  return await prisma.User.findMany({
+  return await prisma.user.findMany({
   orderBy: {
     nome: "asc",
   },
@@ -137,15 +137,15 @@ export async function obtUsuarios(): Promise<User[]> {
 }
 
 export async function obtUsuarioPorId(id: number): Promise<User | null> {
-  return await prisma.User.findUnique({
+  return await prisma.user.findUnique({
     where: {
       id: id
     }
   });
 }
 
-export async function obtUsuarioPorNome(nome: string): Promise<UsuUserario | null> {
-  return await prisma.usuario.findFirst({
+export async function obtUsuarioPorNome(nome: string): Promise<User | null> {
+  return await prisma.user.findFirst({
     where: {
       nome: nome
     }
@@ -160,8 +160,8 @@ export async function obtUsuarioPorEmail(email: string): Promise<User | null> {
   });
 }
 
-export async function remUsuario(id: number): Promise<Usuario> {
-  return await prisma.usuario.delete({
+export async function remUsuario(id: number): Promise<User> {
+  return await prisma.user.delete({
     where: {
       id: Number(id),
     }
