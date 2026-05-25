@@ -8,7 +8,7 @@ import { redirect, RedirectType } from "next/navigation";
 import bcrypt from 'bcryptjs'; 
 
 
-export async function efetuarLogin(prevState: any, formData: FormData) {
+export async function efetuarLogin(prevState: unknown, formData: FormData) {
 
   let success;
 
@@ -60,7 +60,7 @@ export async function verificarSenha(senha:string, senhaCriptografada:string) {
   }
 }
 
-export async function adcUsuario(prevState: any, formData: FormData) {
+export async function adcUsuario(prevState: unknown, formData: FormData) {
 
   const schema = z.object({
     nome: z.string().min(1, "Informe o nome"),
@@ -89,9 +89,9 @@ export async function adcUsuario(prevState: any, formData: FormData) {
 
   const res = await prisma.user.create({
     data: {
-      nome: parse.data.nome,
+      name: parse.data.nome,
       email: parse.data.email,
-      senha: await criptografarSenha(parse.data.senha),
+      password: await criptografarSenha(parse.data.senha),
       tipo: parse.data.tipo ? "admin" : "usuario",
     },
   });
@@ -120,9 +120,9 @@ export async function edtUsuario(usuario: User): Promise<User> {
       id: usuario.id,
     },
     data: {
-      nome: usuario.nome,
+      name: usuario.name,
       email: usuario.email,
-      senha: await criptografarSenha(usuario.senha),
+      password: await criptografarSenha(usuario.password),
       tipo: usuario.tipo ? "admin" : "usuario",
     },
   });
@@ -131,12 +131,12 @@ export async function edtUsuario(usuario: User): Promise<User> {
 export async function obtUsuarios(): Promise<User[]> {
   return await prisma.user.findMany({
   orderBy: {
-    nome: "asc",
+    name: "asc",
   },
 });
 }
 
-export async function obtUsuarioPorId(id: number): Promise<User | null> {
+export async function obtUsuarioPorId(id: string): Promise<User | null> {
   return await prisma.user.findUnique({
     where: {
       id: id
@@ -147,7 +147,7 @@ export async function obtUsuarioPorId(id: number): Promise<User | null> {
 export async function obtUsuarioPorNome(nome: string): Promise<User | null> {
   return await prisma.user.findFirst({
     where: {
-      nome: nome
+      name: nome
     }
   });
 }
@@ -160,10 +160,10 @@ export async function obtUsuarioPorEmail(email: string): Promise<User | null> {
   });
 }
 
-export async function remUsuario(id: number): Promise<User> {
+export async function remUsuario(id: string): Promise<User> {
   return await prisma.user.delete({
     where: {
-      id: Number(id),
+      id: id,
     }
   });
 }

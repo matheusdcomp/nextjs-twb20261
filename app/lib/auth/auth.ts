@@ -2,8 +2,8 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import type { Provider } from "next-auth/providers";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { prisma } from "@/app/lib/data/prisma";
-import { Tipo } from "@/app/generated/prisma";
+import prisma from "@/app/lib/data/prisma";
+import { Tipo } from "@/generated/prisma/client";
 import { z } from "zod";
 import { obtUsuarioPorEmail, verificarSenha } from "@/app/(entidades)/usuario/action";
 

@@ -1,5 +1,4 @@
 "use client"
-import Link from "next/link";
 import { remUsuario } from "@/app/(entidades)/usuario/action";
 import { useRouter } from "next/navigation";
 import { use } from "react";
@@ -11,11 +10,7 @@ export default function RemUsuario({ params }: { params: Promise<{ id: string }>
   const router = useRouter();
 
   async function cliqueConfirmar() {
-    await remUsuario(Number(args.id));
-    router.push("/usuario");
-  }
-
-  async function cliqueCancelar() {
+    await remUsuario(args.id);
     router.push("/usuario");
   }
 
@@ -39,7 +34,7 @@ export default function RemUsuario({ params }: { params: Promise<{ id: string }>
           texto="Cancelar"
           tamimg={36}
           wbtn="w-30"
-          ref="/usuario"
+          href="/usuario"
         />
       </div>
     </div>

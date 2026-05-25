@@ -1,31 +1,33 @@
 "use client"
 import { Botao, BotaoLink } from "@/app/ui/botoes";
-import { Usuario } from "@/generated/prisma/client";
+import { User } from "@/generated/prisma/client";
 import { useRouter } from "next/navigation";
 import { use, useEffect, useState } from "react";
-import { edtUsuario, obtUsuarioPorId, obtUsuarios } from "@/app/(entidades)/usuario/action";
+import { edtUsuario, obtUsuarioPorId } from "@/app/(entidades)/usuario/action";
 
 export default function EdtUsuario({ params }: { params: Promise<{ id: string }> }) {
 
   const { id } = use(params);
   const router = useRouter();
-  const [usuario, setUsuario] = useState<Usuario | null>();
+  const [usuario, setUsuario] = useState<User | null>();
   useEffect(() => {
-    obtUsuarioPorId(Number(id)).then(value => setUsuario(value));
+    obtUsuarioPorId(id).then(value => setUsuario(value));
   }, []);
 
   function cliqueConfirmar() {
 
-    const usuario: Usuario = {
-      id: Number(id),
-      nome: document.forms[0]["nome"].value,
+    const usuario: User = {
+      id: id,
+      name: document.forms[0]["nome"].value,
       email: document.forms[0]["email"].value,
-      senha: document.forms[0]["senha"].value,
+      password: document.forms[0]["senha"].value,
       tipo: document.forms[0]["tipo"].checked,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     };
 
     edtUsuario(usuario).then(
-      usuario => alert("Usuario editado: " + usuario.nome)
+      usuario => alert("Usuario editado: " + usuario.name)
     );
 
     router.push("/usuario");
@@ -49,7 +51,7 @@ export default function EdtUsuario({ params }: { params: Promise<{ id: string }>
             type="text"
             id="nome"
             name="nome"
-            defaultValue={usuario?.nome}
+            defaultValue={usuario?.name}
             required />
         </label>
         <label className={cssLabel}>
@@ -95,7 +97,7 @@ export default function EdtUsuario({ params }: { params: Promise<{ id: string }>
           texto="Cancelar"
           tamimg={36}
           wbtn="w-50"
-          ref="/usuario"
+          href={"/usuario"}
         />
       </div>
     </div>
