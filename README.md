@@ -40,6 +40,49 @@ npm install
 
 O sistema evolui ao longo das aulas das disciplinas. A branch **main** tem a aula inicial e as demais branches são identificadas por um número. Quanto maior o número, mais avançado no assunto a branch está e o sistema está mais completo. Alterne entre as branches para visualizar aulas anterior e acompanhar a evolução do conteúdo da disciplina.
 
+Instalei o BD em uma imagem docker. Se fizer isso também, é necessário ativá-la:
+```bash
+docker run --name postgres -e POSTGRES_PASSWORD=sua_senha -p 5432:5432 -d postgres
+```
+
+Na primeira vez, execute os comandos do Prisma ORM. Para Instalar:
+```bash
+npm install prisma --save-dev
+```
+
+Inicializar o PRISMA:
+ - Cria diretorio prisma
+ - Cria arquivo schema.prisma
+ - Cria o arquivo .env
+```bash
+npx prisma init
+```
+
+Edite o arquivo schema.prisma para definir o SGBD e as tabelas. Edite também a variável DATABASE_URL no arquivo .env para configurar a conexão com a base de dados no SGBD. Exemplo do PostgreSQL: 
+```bash
+DATABASE_URL="postgresql://usuario:senha@IP:5432/database?schema=public"
+```
+
+Incialize o servidor do PRISMA (precisa ficar ativo):
+```bash
+npx prisma dev
+```
+
+Execute o modelo para gerar os arquivos de criação:
+```bash
+npx prisma migrate dev
+```
+
+Gere a base de dados:
+```bash
+npx prisma generate
+```
+
+Para visualizar o BD no navegador:
+```bash
+npx prisma studio
+```
+
 ## Execução
 
 Faça o deploy no modo de desenvolvimento:
