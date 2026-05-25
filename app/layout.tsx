@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Topo from "./ui/topo";
 import Menu from "./ui/menu";
+import { SessionProvider } from "next-auth/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,6 +31,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <SessionProvider>
         <div className='h-dvh grid grid-cols-8 grid-rows-8'>
           <Menu />
           <Topo />
@@ -37,6 +39,7 @@ export default function RootLayout({
             {children}
           </div>
         </div>
+        </SessionProvider>
       </body>
     </html>
   );

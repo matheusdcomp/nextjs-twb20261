@@ -1,6 +1,6 @@
 'use client';
 import Tabela from "@/app/ui/tabela";
-import { Usuario } from "@/generated/prisma/client";
+import { User } from "@/generated/prisma/client";
 import { useEffect, useState } from "react";
 import { obtUsuarios } from "./action";
 
