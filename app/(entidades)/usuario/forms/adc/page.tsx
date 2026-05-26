@@ -66,7 +66,7 @@ export default function UsuarioAdcForm() {
             texto="Cancelar"
             tamimg={36}
             wbtn="w-50"
-            ref="/usuario"
+            href="/usuario"
           />
         </div>
         <p

@@ -78,7 +78,7 @@ export default function EdtUsuario({ params }: { params: Promise<{ id: string }>
             type="checkbox"
             id="tipo"
             name="tipo"
-            checked={usuario?.tipo === "admin"}
+            defaultChecked={usuario?.tipo === "admin"}
           />
         </label>
       </form>
@@ -95,7 +95,7 @@ export default function EdtUsuario({ params }: { params: Promise<{ id: string }>
           texto="Cancelar"
           tamimg={36}
           wbtn="w-50"
-          ref="/usuario"
+          href="/usuario"
         />
       </div>
     </div>

@@ -34,12 +34,12 @@ type BotaoLinkProps = {
   texto: string,
   tamimg: number,
   wbtn?: string,
-  ref: string,
+  href: string,
 }
 
 export function BotaoLink(props: BotaoLinkProps) {
   return (
-    <Link href={props.ref} >
+    <Link href={props.href} >
       <button className={cssbt + " " + props.wbtn}>
         <Image
           className="m-auto"

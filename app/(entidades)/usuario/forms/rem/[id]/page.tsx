@@ -39,7 +39,7 @@ export default function RemUsuario({ params }: { params: Promise<{ id: string }>
           texto="Cancelar"
           tamimg={36}
           wbtn="w-30"
-          ref="/usuario"
+          href="/usuario"
         />
       </div>
     </div>

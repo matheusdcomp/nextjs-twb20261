@@ -53,7 +53,7 @@ function THAcoes({ entidade }: { entidade: string }) {
         imagem="/adc.svg"
         texto="ADC"
         tamimg={20}
-        ref={`/${entidade}/forms/adc`}
+        href={`/${entidade}/forms/adc`}
       />
     </th>
   );
@@ -67,13 +67,13 @@ function TDAcoes({ entidade, index }: { entidade: string, index: string }) {
         imagem="/edt.svg"
         texto="EDT"
         tamimg={16}
-        ref={`/${entidade}/forms/edt/${index}`}
+        href={`/${entidade}/forms/edt/${index}`}
       />
       <BotaoLink
         imagem="/rem.svg"
         texto="REM"
         tamimg={16}
-        ref={`/${entidade}/forms/rem/${index}`}
+        href={`/${entidade}/forms/rem/${index}`}
       />
     </td>
   );
