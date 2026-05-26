@@ -5,8 +5,10 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "@/app/lib/data/prisma";
 import { Tipo } from "@/generated/prisma/client";
 import { z } from "zod";
-import { obtUsuarioPorEmail, verificarSenha } from "@/app/(entidades)/usuario/action";
-
+import {
+  obtUsuarioPorEmail,
+  verificarSenha,
+} from "@/app/(entidades)/usuario/action";
 
 const providers: Provider[] = [
   Credentials({
@@ -18,46 +20,48 @@ const providers: Provider[] = [
       //tipo: {},
     },
     authorize: async (credentials) => {
+      try {
+        const signInSchema = z.object({
+          email: z.email("Email inválido").min(1, "O email é obrigatório"),
+          password: z
+            .string()
+            .min(1, "A senha é obrigatória")
+            .min(8, "A senha deve ter mais de 8 caracteres")
+            .max(32, "A senha deve ter no máximo 32 caracteres"),
+        });
 
-      const signInSchema = z.object({
-        email: z.email("Email inválido").min(1, "O email é obrigatório"),
-        password: z.string()
-          .min(1, "A senha é obrigatória")
-          .min(8, "A senha deve ter mais de 8 caracteres")
-          .max(32, "A senha deve ter no máximo 32 caracteres"),
-      });
+        const { email, password } = await signInSchema.parseAsync(credentials);
+        const usuario = await obtUsuarioPorEmail(email);
 
-      const { email, password } = await signInSchema.parseAsync(credentials);    
-      const usuario = await obtUsuarioPorEmail(email);
-      
-      if (!usuario) {
-        console.log("Não existe usuário com esse email.");
+        if (!usuario) {
+          console.log("Não existe usuário com esse email.");
+          throw new Error("Não existe usuário com esse email.");
+        }
+
+        const senhaOK = await verificarSenha(password, usuario.password);
+
+        if (senhaOK) return usuario;
+
+        console.log("Email e/ou senha incorreta.");
+        throw new Error("Email e/ou senha incorreta.");
+      } catch (error) {
+        console.error("Erro na autorização:", error);
         return null;
       }
-
-      const senhaOK = await verificarSenha(password, usuario.password);
-
-      if (senhaOK) 
-        return usuario;
-
-      console.log("Email e/ou senha incorreta.");
-      return null;      
     },
   }),
 ];
 
-
 export const providerMap = providers
   .map((provider) => {
     if (typeof provider === "function") {
-      const providerData = provider()
-      return { id: providerData.id, name: providerData.name }
+      const providerData = provider();
+      return { id: providerData.id, name: providerData.name };
     } else {
-      return { id: provider.id, name: provider.name }
+      return { id: provider.id, name: provider.name };
     }
   })
   .filter((provider) => provider.id !== "credentials");
-
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers,
@@ -66,8 +70,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   adapter: PrismaAdapter(prisma),
   session: {
-		strategy: "jwt",
-	},
+    strategy: "jwt",
+  },
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
@@ -75,7 +79,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.name = user.name;
         token.email = user.email;
         token.password = user.password;
-        token.tipo = user.tipo; 
+        token.tipo = user.tipo;
       }
       return token;
     },

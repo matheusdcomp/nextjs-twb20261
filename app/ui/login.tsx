@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 export default function Login() {
 
   const router = useRouter();
-  const { data: session, status, update } = useSession();//pegar seção em página cliente
+  const { data: session, status } = useSession();//pegar seção em página cliente
 
   async function cliqueLogin() {
 

@@ -1,8 +1,2 @@
-import { auth } from "@/app/lib/auth/auth";
- 
-export default auth((req) => {
-  if (!req.auth && req.nextUrl.pathname !== "/login") {
-    const newUrl = new URL("/login", req.nextUrl.origin)
-    return Response.redirect(newUrl)
-  }
-});
+import { handlers } from "@/app/lib/auth/auth";
+export const { GET, POST } = handlers;

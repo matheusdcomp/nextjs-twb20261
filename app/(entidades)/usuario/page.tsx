@@ -15,7 +15,7 @@ export default function PaginaUsuario() {
         setUsuarios(value);
         setIsLoading(false);
       },
-      error => setIsLoading(false),
+      () => setIsLoading(false),
     );
   }, []);
 
@@ -50,8 +50,8 @@ function usuarioData(usuarios: User[]) {
       </h1>
       <Tabela
         entidade={"usuario"}
-        colunas={["Id", "Nome", "Email", "Tipo"]}
-        linhas={usuarios.map(u => [`${u.id}`, u.nome, u.email, u.tipo])}
+        colunas={["Id","Nome", "Email", "Tipo"]}
+        linhas={usuarios.map(u => [u.id, u.name, u.email, u.tipo])}
       />
     </>
   );
